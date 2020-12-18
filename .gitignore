@@ -21,3 +21,15 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.idea/.gitignore
+.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/react-shop.iml
+.idea/vcs.xml
+
+firebase-debug.log
+.firebase/
+.eslintcache
