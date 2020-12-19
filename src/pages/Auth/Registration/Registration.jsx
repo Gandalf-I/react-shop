@@ -1,40 +1,41 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Input} from "antd";
-import {useForm} from "react-hook-form";
+import {Button} from "antd";
+import {Controller, useForm} from "react-hook-form";
 import {EmailValidator, PasswordValidator} from "../../../validators";
+import {InputField} from "../../../components/Inputs/Input";
 import './Registration.scss'
 import '../../../styles/Form.scss'
 
 const Registration = () => {
-  const { register, handleSubmit } = useForm();
+  const { handleSubmit, control, getValues, errors } = useForm();
 
-  const onSubmit = data => {
-    console.log(data)
+  const onSubmit = () => {
+    console.log(getValues())
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="Form">
-      <Input
-        size="large"
-        placeholder="Email"
-        ref={
-          register({
-            ...EmailValidator
-          })
+    <form onSubmit={handleSubmit(onSubmit)} className='Form'>
+      <Controller
+        as={InputField("Email", errors.email)}
+        name="email"
+        control={control}
+        defaultValue=''
+        rules={
+          {...EmailValidator}
         }
       />
-      <Input
-        size="large"
-        placeholder="Password"
-        ref={
-          register({
-            ...PasswordValidator
-          })
+      <Controller
+        as={InputField("Password", errors.password)}
+        name="password"
+        control={control}
+        defaultValue=''
+        rules={
+          {...PasswordValidator}
         }
       />
-      <Button type="primary" size="large">
-        Sign Up
+      <Button type="primary" size="large" htmlType="submit">
+        Sign In
       </Button>
     </form>
   );

@@ -1,37 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, Input} from 'antd';
-import {EyeInvisibleOutlined, EyeTwoTone} from '@ant-design/icons';
-import {useForm} from "react-hook-form";
+import {Button} from 'antd';
+import {useForm, Controller} from "react-hook-form";
 import {EmailValidator, PasswordValidator} from "../../../validators";
 import './Login.scss'
 import '../../../styles/Form.scss'
+import {InputField, InputPasswordField} from "../../../components/Inputs/Input";
 
 const Login = () => {
-  const { register, handleSubmit } = useForm();
+  const {handleSubmit, control, getValues, errors} = useForm();
 
-  const onSubmit = data => {
-    console.log(data)
+  const onSubmit = () => {
+    console.log(getValues());
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='Form'>
-      <Input
-        size="large"
-        placeholder="Email"
-        ref={
-          register({...EmailValidator})
+      <Controller
+        as={InputField("Email", errors.email)}
+        name="email"
+        control={control}
+        defaultValue=''
+        rules={
+          {...EmailValidator}
         }
       />
-      <Input.Password
-        size="large"
-        placeholder="Password"
-        iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
-        ref={
-          register({...PasswordValidator})
+      <Controller
+        as={InputPasswordField("Password", errors.password)}
+        name="password"
+        control={control}
+        defaultValue=''
+        rules={
+          {...PasswordValidator}
         }
       />
-      <Button type="primary" size="large">
+      <Button type="primary" size="large" htmlType="submit">
         Log In
       </Button>
     </form>

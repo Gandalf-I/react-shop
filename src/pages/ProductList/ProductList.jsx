@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 const ProductList = () => {
   return (
     <div>
-
+      <p>123</p>
     </div>
   );
 }

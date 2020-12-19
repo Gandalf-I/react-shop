@@ -13,11 +13,16 @@ function mapStateToProps(state) {
 
 const Auth = () => {
   return (
-    <Tabs defaultActiveKey="1" centered className='Tabs'>
-      <TabPane tab="Log In" key="1" className='Tab'>
+    <Tabs
+      size="large"
+      defaultActiveKey="1"
+      centered
+      className="Tabs"
+    >
+      <TabPane tab="Log In" key="1" className="Tab">
         <Login/>
       </TabPane>
-      <TabPane tab="Sign Up" key="2" className='Tab'>
+      <TabPane tab="Sign Up" key="2" className="Tab">
         <Registration/>
       </TabPane>
     </Tabs>
