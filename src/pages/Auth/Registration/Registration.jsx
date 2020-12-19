@@ -1,50 +1,21 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Button} from "antd";
-import {Controller, useForm} from "react-hook-form";
-import {EmailValidator, PasswordValidator} from "../../../validators";
-import {InputField} from "../../../components/Inputs/Input";
 import './Registration.scss'
 import '../../../styles/Form.scss'
+import {useFirebase} from "react-redux-firebase";
+import {useHistory} from "react-router";
+import FormAuth from "../FormAuth/FormAuth";
 
 const Registration = () => {
-  const { handleSubmit, control, getValues, errors } = useForm();
+  const firebase = useFirebase();
+  const history = useHistory()
 
-  const onSubmit = () => {
-    console.log(getValues())
+  const registrationUser = ({email, password}) => {
+    firebase.createUser({email, password}).then(() => history.push('/'));
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='Form'>
-      <Controller
-        as={InputField("Email", errors.email)}
-        name="email"
-        control={control}
-        defaultValue=''
-        rules={
-          {...EmailValidator}
-        }
-      />
-      <Controller
-        as={InputField("Password", errors.password)}
-        name="password"
-        control={control}
-        defaultValue=''
-        rules={
-          {...PasswordValidator}
-        }
-      />
-      <Button type="primary" size="large" htmlType="submit">
-        Sign In
-      </Button>
-    </form>
+    <FormAuth name="Sign Up" submit={registrationUser}/>
   );
 }
 
-function mapStateToProps(state) {
-  return {};
-}
-
-export default connect(
-  mapStateToProps,
-)(Registration);
+export default Registration

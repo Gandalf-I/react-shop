@@ -1,11 +1,12 @@
 import React from 'react';
 import {Spin} from "antd";
 import {LoadingOutlined} from '@ant-design/icons';
+import './Loader.scss'
 
 const Loader = () => {
   return (
-    <Spin indicator={
-      <LoadingOutlined style={{fontSize: 24}} spin/>
+    <Spin className='Spin' indicator={
+      <LoadingOutlined className="Loader" spin/>
     }/>
   );
 }

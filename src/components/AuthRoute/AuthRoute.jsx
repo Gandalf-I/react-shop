@@ -5,7 +5,6 @@ import {isEmpty, isLoaded} from "react-redux-firebase";
 
 const AuthRoute = ({component: Component, ...rest}) => {
   const auth = useSelector(state => state.firebase.auth)
-  console.log(auth, isLoaded(auth), isEmpty(auth))
 
   return (
     <Route
