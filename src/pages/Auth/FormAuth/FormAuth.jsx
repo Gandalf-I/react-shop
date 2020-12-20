@@ -1,5 +1,5 @@
 import {Controller, useForm} from "react-hook-form";
-import {InputField, InputPasswordField} from "../../../components/Inputs/Input";
+import {InputField, InputPasswordField} from "../../../components/Inputs/Inputs";
 import {EmailValidator, PasswordValidator} from "../../../validators";
 import {Button} from "antd";
 import React from "react";

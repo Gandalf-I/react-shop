@@ -1,16 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import {Tabs} from 'antd';
 import Login from "./Login/Login";
 import Registration from "./Registration/Registration";
 import './Auth.scss';
-import {Link} from "react-router-dom";
-
 const {TabPane} = Tabs;
-
-function mapStateToProps(state) {
-  return {};
-}
 
 const Auth = () => {
   return (
@@ -30,6 +23,4 @@ const Auth = () => {
   );
 }
 
-export default connect(
-  mapStateToProps,
-)(Auth);
+export default Auth
