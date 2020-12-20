@@ -1,24 +1,19 @@
-import {Redirect, Route} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import React from "react";
 import {useSelector} from "react-redux";
 import {isEmpty, isLoaded} from "react-redux-firebase";
 
-const AuthRoute = ({component: Component, ...rest}) => {
+const AuthRoute = ({children}) => {
   const auth = useSelector(state => state.firebase.auth)
 
   return (
-    <Route
-      {...rest}
-      render={({props}) =>
-        isLoaded(auth) && !isEmpty(auth) ? (
-          <Component {...props}/>
-        ) : (
-          <Redirect
-            to="/auth"
-          />
-        )
-      }
-    />
+    isLoaded(auth) && !isEmpty(auth) ?
+      children :
+      (
+        <Redirect
+          to="/auth"
+        />
+      )
   );
 }
 
