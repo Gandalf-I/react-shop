@@ -1,69 +1,78 @@
 import React from "react";
-import {EyeInvisibleOutlined, EyeTwoTone} from "@ant-design/icons";
-import "./Inputs.scss"
+import {EyeInvisibleOutlined, EyeTwoTone, LockOutlined, MailOutlined} from "@ant-design/icons";
 import moment from 'moment';
 import {DatePicker, InputNumber, Input} from "antd";
 import TextArea from "antd/es/input/TextArea";
+import "./Inputs.scss"
 
-export const InputField = (placeholder, error) => {
+export const InputField = (prop) => {
   return (
     <Input
-      className={error && 'Error'}
+      {...prop}
       size="large"
-      placeholder={placeholder}
     />
   );
 }
 
-export const InputPasswordField = (placeholder, error) => {
+export const EmailField = (prop) => {
+  return (
+    <Input
+      {...prop}
+      size="large"
+      prefix={<MailOutlined/>}
+    />
+  );
+}
+
+export const InputPasswordField = (prop) => {
   return (
     <Input.Password
-      className={error && 'Error'}
+      {...prop}
       size="large"
-      placeholder={placeholder}
+      prefix={<LockOutlined/>}
+      type="password"
       iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
     />
   );
 }
 
-export const TextAreaField = (placeholder, error, maxLength) => {
+export const TextAreaField = (prop) => {
   return (
     <TextArea
-      className={error && 'Error'}
-      placeholder={placeholder}
+      {...prop}
       showCount
-      maxLength={maxLength || 100}
+      size="large"
+      maxLength={prop.maxLength || 100}
     />
   );
 }
 
-export const PriceField = (placeholder, error) => {
+export const PriceField = (prop) => {
   return (
     <InputNumber
-      className={error && 'Error'}
-      placeholder={placeholder}
+      {...prop}
+      min={0}
+      size="large"
       formatter={value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
       parser={value => value.replace(/\$\s?|(,*)/g, '')}
-      // onChange={onChange}
     />
   );
 }
 
-export const DiscountField = (placeholder, error) => {
+export const DiscountField = (prop) => {
   return (
     <InputNumber
-      className={error && 'Error'}
+      {...prop}
       min={10}
-      max={100}
+      max={90}
+      size="large"
       formatter={value => `${value}%`}
       parser={value => value.replace('%', '')}
-      placeholder={placeholder}
-      // onChange={onChange}
     />
   );
 }
 
-export const DateField = (placeholder, error) => {
+export const DateField = (prop) => {
 
   function disabledDate(current) {
     return current && current < moment().endOf('day');
@@ -71,30 +80,9 @@ export const DateField = (placeholder, error) => {
 
   return (
     <DatePicker
-      className={error && 'Error'}
+      {...prop}
       format="YYYY-MM-DD"
       size="large"
-      placeholder={placeholder}
-      // onChange={onChange}
-      picker="date"
-      disabledDate={disabledDate}
-    />
-  )
-}
-
-export const UploadImageField = (placeholder, error) => {
-
-  function disabledDate(current) {
-    return current && current < moment().endOf('day');
-  }
-
-  return (
-    <DatePicker
-      className={error && 'Error'}
-      format="YYYY-MM-DD"
-      size="large"
-      placeholder={placeholder}
-      // onChange={onChange}
       picker="date"
       disabledDate={disabledDate}
     />

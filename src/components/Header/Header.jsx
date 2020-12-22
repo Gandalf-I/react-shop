@@ -1,8 +1,8 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import {useFirebase} from "react-redux-firebase";
 import {Button} from "antd";
 import "./Header.scss"
+import {NavLink} from "react-router-dom";
 
 const Header = () => {
 
@@ -16,18 +16,20 @@ const Header = () => {
     <div className="Header-Wrap">
       <div className="Header">
         <nav className="Navigation">
-          <Link
+          <NavLink
             to='/products'
             className="Link"
+            activeClassName='ActiveLink'
           >
             Product list
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to='/create-product'
             className="Link"
+            activeClassName='ActiveLink'
           >
             Create product
-          </Link>
+          </NavLink>
         </nav>
         <Button
           danger

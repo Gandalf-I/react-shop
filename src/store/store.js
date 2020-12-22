@@ -1,10 +1,10 @@
 import {combineReducers, createStore} from 'redux';
-import productReducers from "./product";
 import {firebaseReducer} from "react-redux-firebase";
+import {firestoreReducer} from 'redux-firestore'
 
 const roodReducer = combineReducers({
   firebase: firebaseReducer,
-  product: productReducers,
+  firestore: firestoreReducer,
 });
 
 const store = createStore(

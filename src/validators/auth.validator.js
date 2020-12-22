@@ -1,10 +1,24 @@
-export const EmailValidator = {
-  required: true,
-  minLength: 3,
-  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-}
+export const EmailValidator = [
+  {
+    required: true,
+    message: 'Email is required'
+  },
+  {
+    type: 'email',
+    message: 'Incorrect email'
+  },
+]
 
-export const PasswordValidator = {
-  required: true,
-  minLength: 6
-}
+export const PasswordValidator = [
+  {
+    required: true,
+    message: 'Password is required'
+  },
+  {
+    type: 'string',
+  },
+  {
+    min: 6,
+    message: 'Min length 6'
+  }
+]

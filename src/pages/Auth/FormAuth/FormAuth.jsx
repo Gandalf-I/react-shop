@@ -1,41 +1,40 @@
-import {Controller, useForm} from "react-hook-form";
-import {InputField, InputPasswordField} from "../../../components/Inputs/Inputs";
-import {EmailValidator, PasswordValidator} from "../../../validators";
-import {Button} from "antd";
+import {Form, Button} from "antd";
 import React from "react";
-import '../../../styles/Form.scss'
+import "./FormAuth.scss"
+import {EmailValidator, PasswordValidator} from "../../../validators";
+import {EmailField, InputPasswordField} from "../../../components/Inputs/Inputs";
 
 const FormAuth = ({submit, name}) => {
-  const {handleSubmit, control, getValues, errors} = useForm();
 
-  const onSubmit = () => {
-    submit(getValues());
-  }
+  const onFinish = values => {
+    submit(values);
+  };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='Form'>
-      <Controller
-        as={InputField("Email", errors.email)}
+    <Form
+      name="auth"
+      onFinish={onFinish}
+      scrollToFirstError
+    >
+      <Form.Item
         name="email"
-        control={control}
-        defaultValue=''
-        rules={
-          {...EmailValidator}
-        }
-      />
-      <Controller
-        as={InputPasswordField("Password", errors.password)}
+        rules={EmailValidator}
+      >
+        <EmailField placeholder="Email"/>
+      </Form.Item>
+      <Form.Item
         name="password"
-        control={control}
-        defaultValue=''
-        rules={
-          {...PasswordValidator}
-        }
-      />
-      <Button type="primary" size="large" htmlType="submit">
-        {name}
-      </Button>
-    </form>
+        rules={PasswordValidator}
+      >
+        <InputPasswordField placeholder="Password"/>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="FormButton">
+          {name}
+        </Button>
+      </Form.Item>
+    </Form>
   )
 }
 

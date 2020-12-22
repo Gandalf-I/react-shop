@@ -1,0 +1,12 @@
+.Card {
+  max-width: 250px;
+  width: 100%;
+  height: 100%;
+  margin: 10px;
+  box-shadow: 5px 5px 10px 5px rgba(114,111,108,0.2);
+
+  .ProductTitle {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+  }
+}

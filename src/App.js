@@ -6,9 +6,10 @@ import Loader from "./components/Loader/Loader";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import {useSelector} from "react-redux";
 import {isLoaded} from "react-redux-firebase";
+import AppWrapper from "./components/AppWrapper/AppWrapper";
 
 const Auth = lazy(() => import('./pages/Auth/Auth'));
-const ProductList = lazy(() => import('./pages/ProductList/ProductList'));
+const Products = lazy(() => import('./pages/Products/Products'));
 const CreateProduct = lazy(() => import('./pages/CreateProduct/CreateProduct'));
 const EditProduct = lazy(() => import('./pages/EditProduct/EditProduct'));
 
@@ -21,13 +22,20 @@ const App = () => {
       {
         !isLoaded(auth) ?
           <Loader/> :
-          <Suspense fallback={Loader}>
+          <Suspense fallback={<Loader/>}>
             <Switch>
-              <Route path="/auth" component={Auth}/>
-              <AuthRoute exact path="/" component={ProductList}/>
-              <AuthRoute path="/create-product" component={CreateProduct}/>
-              <AuthRoute path="/edit-product/:id" component={EditProduct}/>
-              <Redirect to='/'/>
+              <Route exact path="/auth" component={Auth}/>
+              <AuthRoute>
+                <AppWrapper>
+                  <Switch>
+                    <Route path="/products" component={Products}/>
+                    <Route path="/create-product" component={CreateProduct}/>
+                    <Route path="/edit-product/:id" component={EditProduct}/>
+                    <Redirect to='/products'/>
+                  </Switch>
+                </AppWrapper>
+              </AuthRoute>
+              <Redirect to='/products'/>
             </Switch>
           </Suspense>
       }
